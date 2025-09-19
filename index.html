@@ -441,6 +441,15 @@
             background: linear-gradient(45deg, #2e7d32, #4caf50);
             border-radius: 50%;
         }
+
+        /* Custom marker styles */
+        .leaflet-marker-icon.awesome-marker {
+            transition: all 0.3s ease;
+        }
+
+        .leaflet-marker-icon.awesome-marker:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -489,62 +498,58 @@
     <!-- Legend -->
     <div class="legend">
         <div class="legend-item">
-            <div class="legend-marker legend-red"></div>
-            <span>Default</span>
-        </div>
-        <div class="legend-item">
             <div class="legend-marker legend-blue"></div>
-            <span>Theme</span>
+            <span>⭐ Pujo Pandals</span>
         </div>
         <div class="legend-item">
             <div class="legend-marker legend-green"></div>
-            <span>Visited</span>
+            <span>✅ Visited</span>
         </div>
         <div class="legend-item">
             <div class="legend-marker legend-user"></div>
-            <span>Your Location</span>
+            <span>📍 Your Location</span>
         </div>
     </div>
 
     <script>
         // Puja locations data
         const pujaLocations = [
-            { name: "Sreebhumi Sporting Club", lat: 22.6065, lng: 88.4029, type: "red" },
-            { name: "Laketown Association", lat: 22.606, lng: 88.4008, type: "red" },
-            { name: "Dum Dum Park Tarun Dal", lat: 22.6151, lng: 88.4045, type: "red" },
-            { name: "Dum Dum Park Tarun Sangha", lat: 22.6145, lng: 88.406, type: "red" },
-            { name: "Dum Dum Park Sarbojanin", lat: 22.6162, lng: 88.4065, type: "red" },
-            { name: "Dum Dum Park Bharat Chakra", lat: 22.617, lng: 88.405, type: "red" },
-            { name: "Tala Park", lat: 22.619, lng: 88.373, type: "red" },
-            { name: "Tala Pratyay", lat: 22.6205, lng: 88.3735, type: "red" },
-            { name: "Dakshinpara Sarbojanin", lat: 22.614, lng: 88.398, type: "red" },
-            { name: "Bagbazar Sarbojanin", lat: 22.6045, lng: 88.3662, type: "red" },
-            { name: "Jagat Mukherjee Park", lat: 22.6068, lng: 88.3675, type: "red" },
-            { name: "Friends Union", lat: 22.6082, lng: 88.3669, type: "red" },
-            { name: "Shyam Square", lat: 22.6095, lng: 88.3678, type: "red" },
-            { name: "Ahiritola Sarbojanin", lat: 22.5895, lng: 88.3635, type: "blue" },
-            { name: "Beniatola", lat: 22.591, lng: 88.364, type: "blue" },
-            { name: "Kumartuli Sarbojanin", lat: 22.5925, lng: 88.3638, type: "blue" },
-            { name: "Kumartuli Park", lat: 22.593, lng: 88.3642, type: "blue" },
-            { name: "Hatibagan Nabin Pally", lat: 22.599, lng: 88.373, type: "blue" },
-            { name: "Nalin Sarkar Street", lat: 22.5985, lng: 88.3705, type: "blue" },
-            { name: "Hatibagan Sarbojanin", lat: 22.6005, lng: 88.3735, type: "blue" },
-            { name: "Sikdar Bagan", lat: 22.601, lng: 88.372, type: "blue" },
-            { name: "Gouriberia", lat: 22.5955, lng: 88.3665, type: "blue" },
-            { name: "Telenga Bagan", lat: 22.5962, lng: 88.3692, type: "blue" },
-            { name: "Kashi Bose Lane", lat: 22.594, lng: 88.366, type: "blue" },
-            { name: "Karbagan", lat: 22.595, lng: 88.3675, type: "blue" },
-            { name: "Simla Byayam Samity", lat: 22.5935, lng: 88.3698, type: "blue" },
-            { name: "Pathuriaghata Pancher Pally", lat: 22.5835, lng: 88.3645, type: "blue" },
-            { name: "Chaltabagan", lat: 22.592, lng: 88.3715, type: "blue" },
-            { name: "Chorebagan Sarbojanin", lat: 22.5932, lng: 88.3702, type: "blue" },
-            { name: "Mohammad Ali Park", lat: 22.573, lng: 88.3625, type: "blue" },
-            { name: "College Square", lat: 22.574, lng: 88.3632, type: "blue" },
-            { name: "Sealdah Athletic Club", lat: 22.566, lng: 88.3695, type: "blue" },
-            { name: "Santosh Mitra Square", lat: 22.5712, lng: 88.3682, type: "blue" },
-            { name: "Lebutala Park", lat: 22.5725, lng: 88.3678, type: "blue" },
-            { name: "Subodh Mallick Square", lat: 22.5745, lng: 88.368, type: "blue" },
-            { name: "Taltala Sarbojanin", lat: 22.575, lng: 88.3702, type: "blue" }
+            { name: "Sreebhumi Sporting Club", lat: 22.6065, lng: 88.4029,  },
+            { name: "Laketown Association", lat: 22.606, lng: 88.4008,  },
+            { name: "Dum Dum Park Tarun Dal", lat: 22.6151, lng: 88.4045,  },
+            { name: "Dum Dum Park Tarun Sangha", lat: 22.6145, lng: 88.406,  },
+            { name: "Dum Dum Park Sarbojanin", lat: 22.6162, lng: 88.4065,  },
+            { name: "Dum Dum Park Bharat Chakra", lat: 22.617, lng: 88.405,  },
+            { name: "Tala Park", lat: 22.619, lng: 88.373,  },
+            { name: "Tala Pratyay", lat: 22.6205, lng: 88.3735,  },
+            { name: "Dakshinpara Sarbojanin", lat: 22.614, lng: 88.398,  },
+            { name: "Bagbazar Sarbojanin", lat: 22.6045, lng: 88.3662,  },
+            { name: "Jagat Mukherjee Park", lat: 22.6068, lng: 88.3675,  },
+            { name: "Friends Union", lat: 22.6082, lng: 88.3669,  },
+            { name: "Shyam Square", lat: 22.6095, lng: 88.3678,  },
+            { name: "Ahiritola Sarbojanin", lat: 22.5895, lng: 88.3635,  },
+            { name: "Beniatola", lat: 22.591, lng: 88.364,  },
+            { name: "Kumartuli Sarbojanin", lat: 22.5925, lng: 88.3638,  },
+            { name: "Kumartuli Park", lat: 22.593, lng: 88.3642,  },
+            { name: "Hatibagan Nabin Pally", lat: 22.599, lng: 88.373,  },
+            { name: "Nalin Sarkar Street", lat: 22.5985, lng: 88.3705,  },
+            { name: "Hatibagan Sarbojanin", lat: 22.6005, lng: 88.3735,  },
+            { name: "Sikdar Bagan", lat: 22.601, lng: 88.372,  },
+            { name: "Gouriberia", lat: 22.5955, lng: 88.3665,  },
+            { name: "Telenga Bagan", lat: 22.5962, lng: 88.3692,  },
+            { name: "Kashi Bose Lane", lat: 22.594, lng: 88.366,  },
+            { name: "Karbagan", lat: 22.595, lng: 88.3675,  },
+            { name: "Simla Byayam Samity", lat: 22.5935, lng: 88.3698,  },
+            { name: "Pathuriaghata Pancher Pally", lat: 22.5835, lng: 88.3645,  },
+            { name: "Chaltabagan", lat: 22.592, lng: 88.3715,  },
+            { name: "Chorebagan Sarbojanin", lat: 22.5932, lng: 88.3702,  },
+            { name: "Mohammad Ali Park", lat: 22.573, lng: 88.3625,  },
+            { name: "College Square", lat: 22.574, lng: 88.3632,  },
+            { name: "Sealdah Athletic Club", lat: 22.566, lng: 88.3695,  },
+            { name: "Santosh Mitra Square", lat: 22.5712, lng: 88.3682,  },
+            { name: "Lebutala Park", lat: 22.5725, lng: 88.3678,  },
+            { name: "Subodh Mallick Square", lat: 22.5745, lng: 88.368,  },
+            { name: "Taltala Sarbojanin", lat: 22.575, lng: 88.3702,  }
         ];
 
         // Global variables
@@ -553,6 +558,28 @@
         let userMarker = null;
         let routeLayer = null;
         let visitedPlaces = JSON.parse(localStorage.getItem('visited_places') || '[]');
+
+        // Get marker icon based on type and visited status
+        function getMarkerIcon(type, isVisited) {
+            if (isVisited) {
+                return L.AwesomeMarkers.icon({
+                    icon: 'ok',
+                    markerColor: 'green',
+                    prefix: 'glyphicon'
+                });
+            }
+            
+            // Different icons for different types
+            let icon, markerColor;
+            icon = 'home';
+            markerColor = 'blue';
+            
+            return L.AwesomeMarkers.icon({
+                icon: icon,
+                markerColor: markerColor,
+                prefix: 'glyphicon'
+            });
+        }
 
         // Initialize map
         function initMap() {
@@ -565,11 +592,7 @@
 
             // Add markers
             pujaLocations.forEach((location, index) => {
-                const icon = L.AwesomeMarkers.icon({
-                    icon: 'info-sign',
-                    markerColor: visitedPlaces.includes(index) ? 'green' : location.type,
-                    prefix: 'glyphicon'
-                });
+                const icon = getMarkerIcon(location.type, visitedPlaces.includes(index));
 
                 const marker = L.marker([location.lat, location.lng], { icon })
                     .bindPopup(`
@@ -599,6 +622,7 @@
             messageEl.textContent = text;
             messageEl.className = `message ${type}`;
             messageEl.classList.add('show');
+            messageEl.style.textAlign = 'center';
 
             setTimeout(() => {
                 messageEl.classList.remove('show');
@@ -610,7 +634,7 @@
             const listEl = document.getElementById('placesList');
             listEl.innerHTML = '';
 
-            markers.forEach(place => {
+            markers.forEach((place, index) => {
                 const item = document.createElement('div');
                 item.className = `place-item ${visitedPlaces.includes(place.id) ? 'visited' : ''}`;
                 item.innerHTML = `
@@ -618,12 +642,17 @@
                     <div class="place-meta">
                         ${place.distance ? `<span class="distance">${(place.distance / 1000).toFixed(1)} km</span>` : ''}
                         <button class="btn btn-small ${visitedPlaces.includes(place.id) ? 'btn-success' : ''}" 
-                                onclick="toggleVisited(${place.id})">
+                                onclick="event.stopPropagation(); toggleVisited(${place.id})">
                             ${visitedPlaces.includes(place.id) ? '✓' : 'Visit'}
                         </button>
                     </div>
                 `;
-                item.onclick = () => focusPlace(place);
+                // Use the actual place object, not index
+                item.onclick = (e) => {
+                    if (!e.target.closest('button')) {
+                        focusPlace(place);
+                    }
+                };
                 listEl.appendChild(item);
             });
         }
@@ -648,9 +677,11 @@
                 place.marker.openPopup();
             }, 1600);
             
-            // Update active state with animation
-            document.querySelectorAll('.place-item').forEach((el, i) => {
-                el.classList.toggle('active', i === place.id);
+            // Update active state with animation - find correct index in current list
+            document.querySelectorAll('.place-item').forEach((el, listIndex) => {
+                // Find the place in current markers array order
+                const isCurrentPlace = markers[listIndex] && markers[listIndex].id === place.id;
+                el.classList.toggle('active', isCurrentPlace);
             });
 
             // Close sidebar on mobile
@@ -672,28 +703,35 @@
             
             localStorage.setItem('visited_places', JSON.stringify(visitedPlaces));
             
-            // Update marker icon with animation
-            const place = markers[placeId];
-            const icon = L.AwesomeMarkers.icon({
-                icon: 'info-sign',
-                markerColor: visitedPlaces.includes(placeId) ? 'green' : place.type,
-                prefix: 'glyphicon'
-            });
-            place.marker.setIcon(icon);
-            
-            // Add pulse animation
-            setTimeout(() => {
-                const markerElement = place.marker.getElement();
-                if (markerElement) {
-                    markerElement.classList.add('marker-pulse');
-                    setTimeout(() => {
-                        markerElement.classList.remove('marker-pulse');
-                    }, 4500);
-                }
-            }, 100);
+            // Find the correct place by ID and update marker
+            const place = markers.find(m => m.id === placeId);
+            if (place) {
+                const icon = getMarkerIcon(place.type, visitedPlaces.includes(placeId));
+                place.marker.setIcon(icon);
+                
+                // Update popup content
+                place.marker.setPopupContent(`
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">
+                        ${place.name}
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        ${visitedPlaces.includes(placeId) ? '✅ Visited' : 'Not visited yet'}
+                    </div>
+                `);
+                
+                // Add pulse animation
+                setTimeout(() => {
+                    const markerElement = place.marker.getElement();
+                    if (markerElement) {
+                        markerElement.classList.add('marker-pulse');
+                        setTimeout(() => {
+                            markerElement.classList.remove('marker-pulse');
+                        }, 4500);
+                    }
+                }, 100);
+            }
             
             renderPlacesList();
-            event.stopPropagation();
         }
 
         // Show/hide loader
@@ -858,7 +896,7 @@
             const results = document.getElementById('nearestResults');
             
             results.innerHTML = nearest.map((place, i) => `
-                <div class="nearest-item" onclick="focusPlace(markers[${place.id}])" style="cursor: pointer;">
+                <div class="nearest-item" onclick="focusPlace(markers.find(m => m.id === ${place.id}))" style="cursor: pointer;">
                     <strong>${i + 1}. ${place.name}</strong><br>
                     <small>Distance: ${(place.distance / 1000).toFixed(2)} km</small>
                 </div>
@@ -891,14 +929,19 @@
                 visitedPlaces = [];
                 localStorage.removeItem('visited_places');
                 
-                // Reinitialize markers
+                // Reinitialize markers with correct icons
                 markers.forEach(place => {
-                    const icon = L.AwesomeMarkers.icon({
-                        icon: 'info-sign',
-                        markerColor: place.type,
-                        prefix: 'glyphicon'
-                    });
+                    const icon = getMarkerIcon(place.type, false);
                     place.marker.setIcon(icon);
+                    // Update popup content
+                    place.marker.setPopupContent(`
+                        <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">
+                            ${place.name}
+                        </div>
+                        <div style="font-size: 12px; color: #666;">
+                            Not visited yet
+                        </div>
+                    `);
                 });
                 
                 renderPlacesList();
